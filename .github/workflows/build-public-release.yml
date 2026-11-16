@@ -68,10 +68,10 @@ jobs:
           swift run --build-system native QingcaiChecks
           bash scripts/build-app.sh
           asset=Qingcai-macOS-arm64.zip
-          ditto -c -k --norsrc --noextattr --keepParent 'dist/清财.app' "$output/$asset"
+          ditto -c -k --norsrc --noextattr --keepParent 'dist/清财公开版.app' "$output/$asset"
           unzip -tq "$output/$asset"
           ditto -x -k "$output/$asset" "$extracted"
-          app="$extracted/清财.app"
+          app="$extracted/清财公开版.app"
           codesign --verify --deep --strict "$app"
           executable=$(/usr/libexec/PlistBuddy -c 'Print CFBundleExecutable' "$app/Contents/Info.plist")
           check_architectures "$app/Contents/MacOS/$executable" arm64

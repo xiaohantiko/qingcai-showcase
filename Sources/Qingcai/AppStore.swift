@@ -66,7 +66,7 @@ enum Route: String, CaseIterable, Identifiable {
     var isClosed: Bool { document.closedMonths.contains(currentMonthID) }
 
     init() {
-        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Qingcai")
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("QingcaiCommunity")
         repository = FinanceRepository(directory: base)
         if CommandLine.arguments.contains("--demo") { demo = true; document = .demonstration() }
         else { do { document = try repository.load() } catch { self.error = "数据载入失败：\(error.localizedDescription)\n请先备份数据目录，再从历史快照恢复。"; loadFailed = true } }
@@ -236,10 +236,10 @@ enum Route: String, CaseIterable, Identifiable {
     func chooseBackupFolder() {
         guard !demo else { error = "演示模式不写入云盘，请先回到真实账本。"; return }
         let p = NSOpenPanel(); p.canChooseDirectories = true; p.canChooseFiles = false; p.canCreateDirectories = true
-        p.message = "选择 iCloud Drive 或其他同步文件夹。清财会在其中建立 Qingcai-Backup，财务数据及凭证将交由该云盘同步。"
+        p.message = "选择 iCloud Drive 或其他同步文件夹。清财会在其中建立 Qingcai-Community-Backup，财务数据及凭证将交由该云盘同步。"
         guard p.runModal() == .OK, let url = p.url else { return }
         do {
-            let target = url.appendingPathComponent("Qingcai-Backup", isDirectory: true)
+            let target = url.appendingPathComponent("Qingcai-Community-Backup", isDirectory: true)
             guard !target.standardizedFileURL.path.hasPrefix(repository.directory.standardizedFileURL.path) else { throw FinanceError.invalid("请选择独立备份文件夹。") }
             try repository.exportSnapshot(document, to: target)
             UserDefaults.standard.set(try target.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil), forKey: "backupBookmark")

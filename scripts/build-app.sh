@@ -18,7 +18,7 @@ qingcai_build() {
 qingcai_build --product Qingcai -c "$CONFIGURATION"
 qingcai_build --product QingcaiGateway -c "$CONFIGURATION"
 BIN_DIR="$(qingcai_build -c "$CONFIGURATION" --show-bin-path)"
-APP="dist/清财.app"
+APP="dist/清财公开版.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Helpers"
 cp "$BIN_DIR/Qingcai" "$APP/Contents/MacOS/Qingcai"
 cp "$BIN_DIR/QingcaiGateway" "$APP/Contents/Helpers/QingcaiGateway"

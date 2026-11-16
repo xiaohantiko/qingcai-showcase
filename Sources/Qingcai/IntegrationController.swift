@@ -37,7 +37,7 @@ final class GatewayClient {
 
 enum GatewayKeychain {
     static func save(_ token: String, for endpoint: String) throws {
-        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "com.qingcai.gateway", kSecAttrAccount as String: endpoint]
+        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "com.qingcai.community.gateway", kSecAttrAccount as String: endpoint]
         let values: [String: Any] = [kSecValueData as String: Data(token.utf8)]
         let updated = SecItemUpdate(query as CFDictionary, values as CFDictionary)
         if updated == errSecItemNotFound {
@@ -46,7 +46,7 @@ enum GatewayKeychain {
         } else if updated != errSecSuccess { throw FinanceError.invalid("无法更新钥匙串中的网关密钥。") }
     }
     static func load(for endpoint: String) -> String? {
-        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "com.qingcai.gateway", kSecAttrAccount as String: endpoint, kSecReturnData as String: true, kSecMatchLimit as String: kSecMatchLimitOne]
+        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "com.qingcai.community.gateway", kSecAttrAccount as String: endpoint, kSecReturnData as String: true, kSecMatchLimit as String: kSecMatchLimitOne]
         var value: CFTypeRef?
         guard SecItemCopyMatching(query as CFDictionary, &value) == errSecSuccess, let data = value as? Data else { return nil }
         return String(data: data, encoding: .utf8)
@@ -83,7 +83,7 @@ enum GatewayKeychain {
             task.executableURL = helper; task.standardInput = input; task.standardOutput = output; task.standardError = errors
             self.process = task; self.input = input; self.output = output; logOutput = ""
             localToken = UUID().uuidString + UUID().uuidString
-            let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Qingcai/IntegrationSandbox/gateway.sqlite")
+            let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("QingcaiCommunity/IntegrationSandbox/gateway.sqlite")
             let config: [String: Any] = ["token": localToken, "port": 0, "databasePath": base.path, "mode": "sandbox"]
             let configData = try JSONSerialization.data(withJSONObject: config) + Data([10])
             output.fileHandleForReading.readabilityHandler = { [weak self] handle in

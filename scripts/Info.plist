@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
 <key>CFBundleExecutable</key><string>Qingcai</string>
-<key>CFBundleIdentifier</key><string>com.qingcai.mac</string>
-<key>CFBundleName</key><string>清财</string>
-<key>CFBundleDisplayName</key><string>清财</string>
+<key>CFBundleIdentifier</key><string>com.qingcai.community.mac</string>
+<key>CFBundleName</key><string>清财公开版</string>
+<key>CFBundleDisplayName</key><string>清财公开版</string>
 <key>CFBundleVersion</key><string>2</string>
 <key>CFBundleShortVersionString</key><string>1.1.0</string>
 <key>CFBundlePackageType</key><string>APPL</string>
