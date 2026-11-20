@@ -7,7 +7,13 @@
 公开安装包适用于 **Apple 芯片 Mac，macOS 14 或更新版本**。
 
 1. 在发布页下载 `Qingcai-macOS-arm64.zip`。 [最新公开版本和 SHA-256 校验文件](https://github.com/xiaohantiko/qingcai-showcase/releases/latest)
-2. 解压后将「清财公开版.app」拖入「应用程序」，然后打开。当前下载包的签名与公证状态见对应发布说明。
+2. 首次安装时，将解压得到的「清财公开版.app」拖入「应用程序」，从那里打开。当前下载包的签名与公证状态见对应发布说明。
+
+### 更新已安装的公开版
+
+1. 退出清财公开版，在访达中找到原来使用的应用。可以从程序坞图标的「选项 → 在访达中显示」定位。在「显示简介」中核对版本，若现有版本较新，请继续使用现有版本。
+2. 解压新 ZIP，将「清财公开版.app」拖入原应用所在的文件夹，在访达提示时选择「替换」。如果给旧应用改过名，先把新应用改成相同名称。
+3. 从原位置打开应用。账本和凭证仍从 `~/Library/Application Support/QingcaiCommunity/` 读取，云盘备份沿用已有设置。
 
 ## 第一次使用
 
@@ -33,7 +39,8 @@
 ```bash
 bash scripts/build-app.sh
 swift run --build-system native QingcaiChecks
-open 'dist/清财公开版.app'
 ```
+
+本机构建完成后，打开脚本输出的 ZIP 文件，按上文安装或更新。
 
 [更新日志](CHANGELOG.md)

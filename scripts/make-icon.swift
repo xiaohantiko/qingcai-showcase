@@ -1,7 +1,8 @@
 import AppKit
 import Foundation
 
-let folder = URL(fileURLWithPath: "dist/AppIcon.iconset")
+let output = URL(fileURLWithPath: CommandLine.arguments.dropFirst().first ?? "dist", isDirectory: true)
+let folder = output.appendingPathComponent("AppIcon.iconset", isDirectory: true)
 try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
 for size in [16, 32, 128, 256, 512] {
     for scale in [1, 2] {
@@ -26,5 +27,5 @@ for size in [16, 32, 128, 256, 512] {
         try bitmap.representation(using: .png, properties: [:])!.write(to: folder.appendingPathComponent("icon_\(size)x\(size)\(suffix).png"))
     }
 }
-let task = Process(); task.executableURL = URL(fileURLWithPath: "/usr/bin/iconutil"); task.arguments = ["-c", "icns", folder.path, "-o", "dist/AppIcon.icns"]
+let task = Process(); task.executableURL = URL(fileURLWithPath: "/usr/bin/iconutil"); task.arguments = ["-c", "icns", folder.path, "-o", output.appendingPathComponent("AppIcon.icns").path]
 try task.run(); task.waitUntilExit(); if task.terminationStatus != 0 { exit(task.terminationStatus) }
